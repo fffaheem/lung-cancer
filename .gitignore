@@ -1,0 +1,8 @@
+#virtual environment folder
+faheem/
+
+#jupyter notebook checkpoints
+.ipynb_checkpoints/
+
+
+logs/
