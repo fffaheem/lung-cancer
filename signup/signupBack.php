@@ -46,8 +46,8 @@ if($_SERVER["REQUEST_METHOD"]=="POST"){
 
     $passwordHash = password_hash($password,PASSWORD_DEFAULT);
 
-    $sql = "INSERT INTO `users` (`email`,`password`)
-            VALUES ('$email','$passwordHash')";
+    $sql = "INSERT INTO `users` (`name`,`email`,`password`)
+            VALUES ('$name','$email','$passwordHash')";
 
     $res = $conn->query($sql);
     $aff = $conn->affected_rows;

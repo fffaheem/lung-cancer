@@ -32,6 +32,7 @@ if($_SERVER["REQUEST_METHOD"]=="POST"){
     }
 
     $data = $result->fetch_object();
+    $name = $data->{"name"};
     $passwordInDatabase = $data->{"password"};
 
     if(password_verify($password,$passwordInDatabase)){
@@ -39,6 +40,7 @@ if($_SERVER["REQUEST_METHOD"]=="POST"){
 
         session_start();
         $_SESSION["email"] = $email;
+        $_SESSION["name"] = $name;
         $_SESSION["loggedIn"] = "true";        
 
 
