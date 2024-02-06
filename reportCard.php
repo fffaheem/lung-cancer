@@ -4,6 +4,42 @@ include "./partials/conn.php";
 session_start();
 
 if(isset($_GET) and isset($_GET["id"]) and isset($_GET["email"])){
+    $id = $_GET["id"];
+    $email = $_GET["email"];
+
+    $sql = "SELECT * FROM `records` where `s_no` = '$id' and `email` = '$email'";
+    $result = $conn->query($sql);
+    $aff = $conn->affected_rows;
+
+    if($aff < 1){
+      echo "Some Error occured";
+      exit;
+    }
+
+    $data = $result->fetch_object();
+    $name = $data->{"name"};
+    $image = $data->{"image"};
+    $diagnosis = $data->{"diagnosis"};
+    $time = $data->{"time"};
+
+
+    echo "
+    <script>
+        let xhr = new XMLHttpRequest();
+        url = 'http://127.0.0.1:5000/getResult?image=$image'
+        xhr.open('GET', url, true);
+
+        xhr.onload = () => {
+            let data = xhr.responseText;
+            data = JSON.parse(data)['result'];
+            console.log(data)
+        }
+
+        xhr.send();
+    </script>
+    ";
+    
+    // echo $diagnosis;
 
 
 
@@ -59,5 +95,4 @@ if(isset($_GET) and isset($_GET["id"]) and isset($_GET["email"])){
 
 
 </body>
-
 </html>

@@ -44,7 +44,7 @@ if($_SERVER["REQUEST_METHOD"]=="POST"){
 
 
     $sql = "INSERT INTO `records` (`name`,`email`,`image`,`diagnosis`)
-            VALUES ('$sessionName','$sessionEmail','$newImgName','cancer')";
+            VALUES ('$sessionName','$sessionEmail','$newImgName','NA')";
 
     $res = $conn->query($sql);
     $aff = $conn->affected_rows;
