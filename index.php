@@ -1,3 +1,20 @@
+<?php
+
+include "./partials/conn.php";
+session_start();
+$boolLoggedin = false;
+if(isset($_SESSION) and isset($_SESSION["email"]) ){
+  $sessionUsername = $_SESSION["email"];
+  $boolLoggedin = true;
+
+}else{
+  header("location: ./login.html");
+
+}
+
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
