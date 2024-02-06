@@ -41,10 +41,50 @@ if($_SERVER["REQUEST_METHOD"]=="POST"){
 
     move_uploaded_file($tmpName,"./images/".$newImgName);
 
+    $diagnosis = "";
+
+
+    // URL to which you want to send the GET request
+    $url = "http://127.0.0.1:5000/getResult?image=$newImgName";
+
+    // Initialize cURL session
+    $ch = curl_init();
+
+    // Set the URL
+    curl_setopt($ch, CURLOPT_URL, $url);
+
+    // Set options to return the response as a string instead of outputting it directly
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+
+    // Execute cURL session
+    $response = curl_exec($ch);
+
+    // Check if request was successful
+    if ($response === false) {
+        // Handle error
+        unlink("./images/$newImgName");
+        $myArr = array("fail", "Some problem occured please try again later");
+        $myJSON = json_encode($myArr);
+        echo "$myJSON";
+        exit;
+    } else {
+        // Process response
+        $diagnosis = json_decode($response);
+        $diagnosis = $diagnosis->result;
+        // $diagnosis = json_decode($response);
+    }
+
+    // Close cURL session
+    curl_close($ch);
+
+
+
+    
+
 
 
     $sql = "INSERT INTO `records` (`name`,`email`,`image`,`diagnosis`)
-            VALUES ('$sessionName','$sessionEmail','$newImgName','NA')";
+            VALUES ('$sessionName','$sessionEmail','$newImgName','$diagnosis')";
 
     $res = $conn->query($sql);
     $aff = $conn->affected_rows;

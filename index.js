@@ -28,13 +28,17 @@ form.addEventListener("submit",(e)=>{
 
     xhr.onload = ()=>{
         let data = xhr.responseText;
+        // console.log(data)
         data = JSON.parse(data);
 
         if(data[0]=="success"){
             appendAlert("Success", 'success');
+            let image = document.getElementById("image");
+            image.value = '';
             window.location.href = `./reportCard.php?id=${data[1]}&email=${data[2]}`;
         }else{
             appendAlert(data[1], 'danger');
+            image.value = '';
             return;
         }
         

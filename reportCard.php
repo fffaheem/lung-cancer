@@ -21,25 +21,35 @@ if(isset($_GET) and isset($_GET["id"]) and isset($_GET["email"])){
     $image = $data->{"image"};
     $diagnosis = $data->{"diagnosis"};
     $time = $data->{"time"};
+    $message = "";
+    if($diagnosis == 'Benign'){
+      $message = "Dear $name,<br> I\'m pleased to share that your recent lung cancer screening results indicate a <b>Benign</b> diagnosis. This means no malignant or concerning abnormalities were detected. Feel free to reach out if you have any questions or need further information. Take care and stay well!<br>Sincerely, <br>Team .";
+    }else if($diagnosis == 'Malignant'){
+      $message = "Dear $name,<br> I regret to inform you that your recent lung cancer screening has revealed a diagnosis of <b>Malignant</b>. Please know that we are committed to providing you with the necessary support and guidance moving forward. Our healthcare team is here to discuss the next steps, answer any questions you may have, and develop a comprehensive plan tailored to your needs. Your well-being is our top priority, and we are dedicated to assisting you through this challenging time.<br>Sincerely, <br>Team .";
+    }else if($diagnosis == 'Normal'){
+      $messageL = "Dear $name,<br> Great news! Your recent lung cancer screening came back as <b>Normal</b> No abnormalities were detected. Keep up the good work with your proactive health measures. If you have any questions or need further guidance, feel free to reach out. Take care!<br>Best regards, <br>Team .";
+    }else{
+      $message = "Sorry for the Incovenience, We are Working on Getting Better EveryDy.";
+    }
 
-
-    echo "
-    <script>
-        let xhr = new XMLHttpRequest();
-        url = 'http://127.0.0.1:5000/getResult?image=$image'
-        xhr.open('GET', url, true);
-
-        xhr.onload = () => {
-            let data = xhr.responseText;
-            data = JSON.parse(data)['result'];
-            console.log(data)
-        }
-
-        xhr.send();
-    </script>
+    $diagnosisCard = 
+    "
+    <div class='card mb-3'>
+      <div class='row g-0'>
+        <div class='col-md-4'>
+          <img src='./images/$image' class='img-fluid rounded-start' alt='...'>
+        </div>
+        <div class='col-md-8'>
+          <div class='card-body'>
+            <h5 class='card-title'>$name</h5>
+            <p class='card-text'><small class='text-body-secondary'>$email</small></p>
+            <p class='card-text'>$message</p>
+            <p class='card-text'><small class='text-body-secondary'>$time</small></p>
+          </div>
+        </div>
+      </div>
+    </div>
     ";
-    
-    // echo $diagnosis;
 
 
 
@@ -72,20 +82,7 @@ if(isset($_GET) and isset($_GET["id"]) and isset($_GET["email"])){
             <h2 class="text-center">Report Card</h2>
         </div>
 
-        <div class="card mb-3">
-            <div class="row g-0">
-              <div class="col-md-4">
-                <img src="./images/kulsoomzahra24@gmail.com052a88c62e53dd54623c83e65bcf93c5609d4366bef07a3658a6b7d78d3595b0.png" class="img-fluid rounded-start" alt="...">
-              </div>
-              <div class="col-md-8">
-                <div class="card-body">
-                  <h5 class="card-title">Card title</h5>
-                  <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                  <p class="card-text"><small class="text-body-secondary">Last updated 3 mins ago</small></p>
-                </div>
-              </div>
-            </div>
-        </div>
+        <?php echo $diagnosisCard; ?>
 
 
     </div>
