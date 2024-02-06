@@ -8,7 +8,7 @@ if(isset($_SESSION) and isset($_SESSION["email"]) ){
   $boolLoggedin = true;
 
 }else{
-  header("location: ./login.html");
+  header("location: ./login/login.php");
 
 }
 
@@ -18,18 +18,12 @@ if(isset($_SESSION) and isset($_SESSION["email"]) ){
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
+  <?php include "./partials/links.php"; ?>
+  <title>Cancer Prediction</title>
 </head>
 <body>
     
-    <nav class="navbar navbar-expand-lg bg-body-tertiary bg-dark border-bottom border-body" data-bs-theme="dark">
-        <div class="container-fluid">
-          <a class="navbar-brand" href="#">Cancer Check</a>
-        </div>
-    </nav>
+    <?php   include "./partials/navbar.php";  ?>
 
 
     <div class="container-sm my-5">
@@ -90,9 +84,5 @@ if(isset($_SESSION) and isset($_SESSION["email"]) ){
 
     </div>
 
-
-
-
 </body>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
 </html>
