@@ -36,7 +36,7 @@ $nav =
 "
 <nav class='navbar navbar-expand-lg bg-body-tertiary bg-dark border-bottom border-body' data-bs-theme='dark'>
   <div class='container-fluid'>
-    <a class='navbar-brand' href='#'>Cancer Check</a>
+    <a class='navbar-brand'  style='cursor: pointer;' >Cancer Check</a>
 
     $logout
   </div>

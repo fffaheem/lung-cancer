@@ -15,7 +15,7 @@ if(isset($_SESSION) and isset($_SESSION["email"]) ){
 
 $record = "";
 
-$sql = "SELECT * FROM `records` where `email` = '$sessionEmail'";
+$sql = "SELECT * FROM `records` where `email` = '$sessionEmail' ORDER BY `records`.`time` desc";
 $result = $conn->query($sql);
 $aff = $conn->affected_rows;
 
